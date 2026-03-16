@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring Boot Enterprise - API Management Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6db33f;
+            --primary-dark: #5ca135;
+            --secondary: #34302d;
+            --accent: #47d2b1;
+            --surface: #ffffff;
+            --background: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--background);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 10%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero {
+            padding: 100px 10% 80px;
+            text-align: center;
+            background: radial-gradient(circle at top right, rgba(109, 179, 63, 0.05), transparent),
+                        radial-gradient(circle at bottom left, rgba(71, 210, 177, 0.05), transparent);
+        }
+
+        .version-tag {
+            background-color: rgba(109, 179, 63, 0.1);
+            color: var(--primary-dark);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 48px;
+            font-weight: 400;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 14px rgba(109, 179, 63, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(109, 179, 63, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: var(--surface);
+            color: var(--secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--background);
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            padding: 0 10% 100px;
+            margin-top: -20px;
+        }
+
+        .card {
+            background-color: var(--surface);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .card-label {
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: var(--secondary);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 60px 10%;
+            text-align: center;
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .grid { padding: 0 5% 60px; }
+            .header { padding: 1rem 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="/" class="brand">
+            <div class="brand-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            </div>
+            Spring Boot Lab
+        </a>
+        <a href="/swagger-ui/index.html" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.85rem;">Débuter</a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="version-tag">STABLE v0.0.1-RELEASE</div>
+            <h1>Système de Gestion Académique</h1>
+            <p>Une plateforme API haute performance conçue pour l'administration des étudiants et des filières, suivant les standards architecturaux d'entreprise.</p>
+            
+            <div class="btn-group">
+                <a href="/swagger-ui/index.html" class="btn btn-primary">Explorer les Endpoints</a>
+                <a href="#documentation" class="btn btn-secondary">Documentation Système</a>
+            </div>
+        </section>
+
+        <section class="grid" id="documentation">
+            <div class="card">
+                <span class="card-label">Architecture</span>
+                <h3>Structure N-Tier</h3>
+                <p>Découplage strict entre la présentation, la logique métier et l'accès aux données pour une maintenance optimisée.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Data Layer</span>
+                <h3>JPA & Hibernate</h3>
+                <p>Gestion sophistiquée de la persistance avec Spring Data JPA et optimisation des requêtes via MySQL.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Security</span>
+                <h3>DTO Layer</h3>
+                <p>Isolation des modèles de données internes pour garantir l'intégrité et la sécurité des informations exposées.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Integrity</span>
+                <h3>Bean Validation</h3>
+                <p>Contrôles automatiques des contraintes au niveau applicatif pour assurer la cohérence des flux entrants.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Observability</span>
+                <h3>OpenAPI Support</h3>
+                <p>Documentation interactive auto-générée permettant le test et l'intégration rapide des services tiers.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Standardization</span>
+                <h3>Problem Detail</h3>
+                <p>Implémentation de la norme RFC 7807 pour une gestion des erreurs uniforme et sémantique.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Enterprise Lab. Tous droits réservés.</p>
+        <div class="footer-links">
+            <a href="/v3/api-docs">JSON Definition</a>
+            <a href="https://spring.io">Documentation Spring</a>
+            <a href="#">Support Technique</a>
+        </div>
+    </footer>
+
+</body>
+</html>

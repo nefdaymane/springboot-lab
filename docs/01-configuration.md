@@ -12,6 +12,8 @@ Lors de la création du projet sur [start.spring.io](https://start.spring.io), v
 4.  **Spring Boot Validation** : Pour valider les données entrantes (ex: `@NotNull`, `@Email`).
 5.  **Springdoc OpenAPI / Swagger UI** : Pour générer la documentation interactive de l'API.
 
+*Note : La page d'accueil est servie comme une ressource statique (`src/main/resources/static/index.html`).*
+
 ---
 
 ## 1. Configurer MySQL
